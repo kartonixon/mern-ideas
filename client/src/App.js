@@ -33,7 +33,7 @@ function App() {
   }, [sortBy]);
 
   const fetchData = () => {
-    axios.get('http://localhost:5000/ideas/')
+    axios.get('https://mern-ideas.herokuapp.com/ideas/')
       .then(response => {
         setIdeas(response.data)
       })
@@ -41,41 +41,37 @@ function App() {
   };
 
   const upvoteIdea = (id, content, upvotes) => {
-    axios.post(`http://localhost:5000/ideas/update/${id}`, {
+    axios.post(`https://mern-ideas.herokuapp.com/ideas/update/${id}`, {
       content: content,
       upvotes: upvotes + 1
       })
       .then(res => {
         console.log(res);
-        fetchData();
-        
       })
       .catch(err => console.log(err))
   }
 
   const downvoteIdea = (id, content, upvotes) => {
-    axios.post(`http://localhost:5000/ideas/update/${id}`, {
+    axios.post(`https://mern-ideas.herokuapp.com/ideas/update/${id}`, {
       content: content,
       upvotes: upvotes - 1
       })
       .then(res => {
         console.log(res);
-        fetchData();
-        
       })
       .catch(err => console.log(err))
   }
 
   const deleteIdea = (id) => {
     setIdeas(ideas.filter(idea => idea._id !== id))
-    axios.delete(`http://localhost:5000/ideas/delete/${id}`)
+    axios.delete(`https://mern-ideas.herokuapp.com/ideas/delete/${id}`)
       .then(res => console.log(res))
       .catch(err => console.log(err))
   }
 
   const shareIdea = (idea) => {
     const newIdea = { content: idea }
-    axios.post(`http://localhost:5000/ideas/add`, newIdea)
+    axios.post(`https://mern-ideas.herokuapp.com/ideas/add`, newIdea)
       .then(res => {
         console.log(res);
         fetchData();
