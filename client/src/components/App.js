@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios'
 import IdeaCard from './IdeaCard'
 import InputArea from './InputArea'
+import Header from './Header'
+
+import { Button, Box, Container, Grid, Typography } from '@material-ui/core'
+import RefreshIcon from '@material-ui/icons/Refresh'
 
 function App() {
   const [ideas, setIdeas] = React.useState([]);
@@ -80,15 +84,35 @@ function App() {
   }
   
   return (
-    <div>
-      <h1>DZIEN DOBRY</h1>
+    <Container maxWidth="md" align="center">
+      <Box m={2}>
+        <Header />
+      </Box>
+      
       <InputArea onShare={shareIdea} />
-      <button onClick={() => window.location.reload()}>Refresh</button>
-      <button onClick={() => setSortBy('createdAt')} style={sortBy==='createdAt' ? { pointerEvents: "none", opacity: 0.3 } : null}>Newest</button>
-      <button onClick={() => setSortBy('upvotes')} style={sortBy==='upvotes' ? { pointerEvents: "none", opacity: 0.3 } : null}>Most upvoted</button>
-      {ideas.map(idea => <IdeaCard key={idea._id} id={idea._id} content={idea.content} upvotes={idea.upvotes} onUpvote={upvoteIdea} onDownvote={downvoteIdea} onDelete={deleteIdea}/>)}
-    </div>
-    
+
+      <Grid container>
+        <Grid item sm={12} md={6}>
+            <Typography variant="h4" style={{float: "left"}}>
+                Ideas Library
+            </Typography>
+        </Grid>
+        <Grid item sm={12} md={6}>
+          <Box style={{float: "right"}}>
+            <Button variant="contained" startIcon={<RefreshIcon />} onClick={() => window.location.reload()}>Refresh</Button>
+            &nbsp; &nbsp;
+            <Button variant="contained" onClick={() => setSortBy('createdAt')} style={sortBy==='createdAt' ? { pointerEvents: "none", opacity: 0.3 } : null}>Newest</Button>
+            &nbsp; &nbsp;
+            <Button variant="contained" onClick={() => setSortBy('upvotes')} style={sortBy==='upvotes' ? { pointerEvents: "none", opacity: 0.3 } : null}>Most upvoted</Button>
+          </Box>
+        </Grid>
+      </Grid>
+      <hr style={{color:"gray"}} />
+
+      <Grid container spacing={3}>
+        {ideas.map(idea => <IdeaCard key={idea._id} id={idea._id} content={idea.content} upvotes={idea.upvotes} onUpvote={upvoteIdea} onDownvote={downvoteIdea} onDelete={deleteIdea}/>)}
+      </Grid>
+    </Container>
   );
 }
 
