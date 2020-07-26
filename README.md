@@ -16,7 +16,3 @@ A simple app that allows users to share anonymously their ideas with the world a
 - Node.js
 - Styled with MaterialUI
 - Deployed to Heroku
-
-<p style="text-align: center;">
-    <img src="https://counter3.stat.ovh/private/freecounterstat.php?c=mnxnuj9wdju2xc3brxn3cdbtpy7ayqp6" alt="Counter">
-</p>
